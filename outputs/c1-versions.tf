@@ -18,10 +18,3 @@ provider "google" {
   region  = var.gcp-region
   alias   = "dev"
 }
-
-provider "google" {
-  # Configuration options
-  project = "terraform-practice-436907"
-  region  = "europe-west1"
-  alias   = "prod"
-}
