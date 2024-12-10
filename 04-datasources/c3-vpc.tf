@@ -1,27 +1,13 @@
-# Resource block for VPC
-
-resource "google_compute_network" "myVPC" {
+# Resource: VPC
+resource "google_compute_network" "myvpc" {
   name                    = "vpc1"
-  auto_create_subnetworks = false # defines VPC is manual
-  project                 = "terraform-practice-436907"
-
-
+  auto_create_subnetworks = false
 }
 
-# resource block for subnet
-
-resource "google_compute_subnetwork" "mysubnet1" {
-  name          = "subnet1"
-  region        = "us-central1"
-  provider      = google.dev
+# Resource: Subnet
+resource "google_compute_subnetwork" "mysubnet" {
+  name          = "${var.gcp_region1}-subnet"
+  region        = var.gcp_region1
   ip_cidr_range = "10.128.0.0/20"
-  network       = google_compute_network.myVPC.id
-}
-
-resource "google_compute_subnetwork" "mysubnet2" {
-  name          = "subnet2"
-  region        = "us-central1"
-  provider      = google.dev
-  ip_cidr_range = "10.132.0.0/20"
-  network       = google_compute_network.myVPC.id
+  network       = google_compute_network.myvpc.id
 }
